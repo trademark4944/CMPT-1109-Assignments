@@ -19,13 +19,13 @@ char checkDigit(int odd, int even) {
 	return returningChar;
 }
 
-void EAN8() {
-	char productCodeArray[8];
+void processProductCode(int length) {
+	char productCodeArray[18];
 	int staticCastHolder, oddPositions = 0, evenPositions = 0;
-	cout << "Enter first 7 digits of your product code: ";
+	cout << "Enter first " << (length - 1) << " digits of your product code: ";
 	cin >> productCodeArray;
 
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < length; i++) {
 		if (i % 2 == 0) {
 			staticCastHolder = productCodeArray[i] - 48;
 			oddPositions += staticCastHolder;
@@ -33,7 +33,7 @@ void EAN8() {
 	}
 	oddPositions *= 3;
 
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < length; i++) {
 		if (i % 2 != 0) {
 			staticCastHolder = productCodeArray[i] - 48;
 			evenPositions += staticCastHolder;
@@ -53,7 +53,7 @@ void EAN8() {
 int main() {
 
 	bool cont = true;
-	int codeType;
+	int codeType, length;
 
 	cout << "Check Product Calculator" << endl;
 
@@ -67,7 +67,8 @@ int main() {
 		
 		switch (codeType) {
 		case 1:
-			EAN8();
+			length = 8
+			processProductCode(length);
 			break;
 		case 6:
 			cout << endl << "Exitting..." << endl;
