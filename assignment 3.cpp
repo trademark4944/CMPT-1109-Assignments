@@ -13,7 +13,14 @@ public:
 			coeff[i] = 0;
 		}
 	}
-	polynomial()
+	polynomial(int degree, int inputs[]) {
+		size = degree + 1;
+		coeff = new int[size];
+		for (int i = 0; i < size; i++) {
+			coeff[i] = inputs[i];
+		}
+
+	}
 	polynomial(polynomial& x) {
 		size = x.size;
 		coeff = new int[size];
