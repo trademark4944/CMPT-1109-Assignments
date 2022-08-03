@@ -50,6 +50,76 @@ public:
 			}
 		}
 	}
+	void add(polynomial a) {
+		int ansSize = 0;
+		if (a.size > size) {
+			ansSize = a.size;
+		}
+		else {
+			ansSize = size;
+		}
+		polynomial sum(ansSize);
+
+		if (ansSize > size) {
+			for (int i = 0; i < size; i++) {
+				sum.coeff[i] = coeff[i] + a.coeff[i];
+			}
+			for (int i = size; i < ansSize; i++) {
+				sum.coeff[i] = a.coeff[i];
+			}
+		}
+		else {
+			for (int i = 0; i < a.size; i++) {
+				sum.coeff[i] = coeff[i] + a.coeff[i];
+			}
+			for (int i = a.size; i < ansSize; i++) {
+				sum.coeff[i] = coeff[i];
+			}
+		}
+
+		delete[] coeff;
+		size = ansSize;
+		coeff = new double[size];
+
+		for (int i = 0; i < size; i++) {
+			coeff[i] = sum.coeff[i];
+		}
+	}
+	void sub(polynomial b) {
+		int ansSize = 0;
+		if (b.size > size) {
+			ansSize = b.size;
+		}
+		else {
+			ansSize = size;
+		}
+		polynomial sum(ansSize);
+
+		if (ansSize > size) {
+			for (int i = 0; i < size; i++) {
+				sum.coeff[i] = coeff[i] + b.coeff[i];
+			}
+			for (int i = size; i < ansSize; i++) {
+				sum.coeff[i] = 0 - b.coeff[i];
+			}
+		}
+		else {
+			for (int i = 0; i < b.size; i++) {
+				sum.coeff[i] = coeff[i] - b.coeff[i];
+			}
+			for (int i = b.size; i < ansSize; i++) {
+				sum.coeff[i] = coeff[i];
+			}
+		}
+
+		delete[] coeff;
+		size = ansSize;
+		coeff = new double[size];
+
+		for (int i = 0; i < size; i++) {
+			coeff[i] = sum.coeff[i];
+		}
+	}
 };
 
 int main() {
