@@ -2,28 +2,28 @@
 using namespace std;
 
 class polynomial {
-	int* coeff;
+	double* coeff;
 	int size;
 public:
-	polynomial() { size = 1; coeff = new int[1]; coeff[0] = 0; }
+	polynomial() { size = 1; coeff = new double[1]; coeff[0] = 0; }
 	polynomial(int degree) {
 		size = degree + 1;
-		coeff = new int[size];
+		coeff = new double[size];
 		for (int i = 0; i < size; i++) {
 			coeff[i] = 0;
 		}
 	}
-	polynomial(int degree, int inputs[]) {
+	polynomial(int degree, double inputs[]) {
 		size = degree + 1;
-		coeff = new int[size];
+		coeff = new double[size];
 		for (int i = 0; i < size; i++) {
 			coeff[i] = inputs[i];
 		}
 
 	}
-	polynomial(polynomial& x) {
+	polynomial (polynomial& x) {
 		size = x.size;
-		coeff = new int[size];
+		coeff = new double[size];
 		for (int i = 0; i < size; i++) {
 			coeff[i] = x.coeff[i];
 		}
@@ -31,7 +31,9 @@ public:
 	~polynomial() {
 		delete[] coeff;
 		size = 0;
+		coeff = nullptr;
 	}
+
 	polynomial operator=(polynomial& x) {
 		size = x.size;
 		coeff = new double[size];
@@ -39,7 +41,7 @@ public:
 			coeff[i] = x.coeff[i];
 		}
 	}
-
+	
 	void print() {
 		for (int i = (size - 1); i >= 0; i--) {
 			if (i == 0) {
@@ -50,6 +52,7 @@ public:
 			}
 		}
 	}
+
 	void add(polynomial a) {
 		int ansSize = 0;
 		if (a.size > size) {
@@ -93,22 +96,22 @@ public:
 		else {
 			ansSize = size;
 		}
-		polynomial sum(ansSize);
+		polynomial difference(ansSize);
 
 		if (ansSize > size) {
 			for (int i = 0; i < size; i++) {
-				sum.coeff[i] = coeff[i] + b.coeff[i];
+				difference.coeff[i] = coeff[i] + b.coeff[i];
 			}
 			for (int i = size; i < ansSize; i++) {
-				sum.coeff[i] = 0 - b.coeff[i];
+				difference.coeff[i] = 0 - b.coeff[i];
 			}
 		}
 		else {
 			for (int i = 0; i < b.size; i++) {
-				sum.coeff[i] = coeff[i] - b.coeff[i];
+				difference.coeff[i] = coeff[i] - b.coeff[i];
 			}
 			for (int i = b.size; i < ansSize; i++) {
-				sum.coeff[i] = coeff[i];
+				difference.coeff[i] = coeff[i];
 			}
 		}
 
@@ -117,9 +120,10 @@ public:
 		coeff = new double[size];
 
 		for (int i = 0; i < size; i++) {
-			coeff[i] = sum.coeff[i];
+			coeff[i] = difference.coeff[i];
 		}
 	}
+
 	void mult(polynomial c) {
 		int ansSize = (size + c.size - 1);
 		polynomial product(ansSize);
@@ -138,6 +142,7 @@ public:
 			coeff[i] = product.coeff[i];
 		}
 	}
+
 	double search(int degree) {
 		return coeff[degree];
 	}
