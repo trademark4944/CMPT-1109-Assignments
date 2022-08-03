@@ -32,6 +32,24 @@ public:
 		delete[] coeff;
 		size = 0;
 	}
+	polynomial operator=(polynomial& x) {
+		size = x.size;
+		coeff = new double[size];
+		for (int i = 0; i < size; i++) {
+			coeff[i] = x.coeff[i];
+		}
+	}
+
+	void print() {
+		for (int i = (size - 1); i >= 0; i--) {
+			if (i == 0) {
+				cout << coeff[i] << endl;
+			}
+			else {
+				cout << coeff[i] << "(X ^ " << i << ") + ";
+			}
+		}
+	}
 };
 
 int main() {
