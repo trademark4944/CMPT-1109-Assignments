@@ -120,6 +120,24 @@ public:
 			coeff[i] = sum.coeff[i];
 		}
 	}
+	void mult(polynomial c) {
+		int ansSize = (size + c.size - 1);
+		polynomial product(ansSize);
+
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < c.size; j++) {
+				product.coeff[(i + j)] += (c.coeff[j] * coeff[i]);
+			}
+		}
+
+		delete[] coeff;
+		size = ansSize;
+		coeff = new double[size];
+
+		for (int i = 0; i < size; i++) {
+			coeff[i] = product.coeff[i];
+		}
+	}
 };
 
 int main() {
