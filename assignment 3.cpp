@@ -138,9 +138,39 @@ public:
 			coeff[i] = product.coeff[i];
 		}
 	}
+	double search(int degree) {
+		return coeff[degree];
+	}
+
+	void assign(int degree, double value) {
+		coeff[degree] = value;
+	}
 };
 
 int main() {
+	double array[] = { 1,2,3 };
+	double array2[] = { 1, 1 };
+	polynomial num1(2, array);
+	polynomial num2(1, array2);
+
+	num1.print();
+	num2.print();
+
+	//num1.add(num2);
+
+	//num1.print();
+
+	//num1.sub(num2);
+
+	num1.mult(num2);
+
+	num1.print();
+
+	double val = num1.search(2);
+	cout << val << endl;
+
+	num1.assign(2, 7);
+	num1.print();
 
 	return 0;
 }
